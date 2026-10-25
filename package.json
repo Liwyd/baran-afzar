@@ -1,0 +1,45 @@
+{
+  "name": "baran-afzar",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Baran Afzar — a two-person software engineering team website.",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "build": "astro check && astro build",
+    "preview": "node ./dist/server/entry.mjs",
+    "start": "node ./dist/server/entry.mjs",
+    "check": "astro check && eslint . && vitest run",
+    "typecheck": "astro check",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "admin": "node ./scripts/admin.mjs",
+    "backup": "bash ./scripts/backup.sh"
+  },
+  "dependencies": {
+    "@astrojs/node": "^11.1.9",
+    "@fontsource/inter": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/vazirmatn": "^5.3.0",
+    "astro": "7.4.1",
+    "better-sqlite3": "^13.0.3",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@eslint/js": "^9.32.0",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^22.16.0",
+    "astro-eslint-parser": "^1.2.2",
+    "eslint": "^9.32.0",
+    "eslint-plugin-astro": "^1.3.1",
+    "globals": "^16.3.0",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.38.0",
+    "vitest": "^3.2.4"
+  }
+}
