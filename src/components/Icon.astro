@@ -1,0 +1,48 @@
+---
+interface Props {
+  name: 'arrow-right' | 'arrow-up-right' | 'arrow-down' | 'arrow-up';
+  size?: number;
+  class?: string;
+}
+
+const { name, size, class: className } = Astro.props;
+
+const icons = {
+  'arrow-right': {
+    w: 13.155,
+    h: 11.455,
+    d: 'M7.428 11.455L6.443 10.483L10.496 6.431H0V5.025H10.496L6.443 0.985L7.428 0L13.155 5.728L7.428 11.455',
+  },
+  'arrow-up-right': {
+    w: 9.792,
+    h: 9.8,
+    d: 'M0.997 9.8L0 8.81L7.415 1.38H1.687L1.7 0H9.792V8.1H8.399L8.412 2.38L0.997 9.8',
+  },
+  'arrow-down': {
+    w: 11.467,
+    h: 13.17,
+    d: 'M6.43 0V10.51L10.47 6.46L11.467 7.44L5.727 13.17L0 7.44L0.971 6.46L5.024 10.51V0H6.43',
+  },
+  'arrow-up': {
+    w: 11.5,
+    h: 13.2,
+    d: 'M5.05 13.2V2.55L0.95 6.65L0 5.7L5.75 0L11.5 5.7L10.55 6.65L6.45 2.55V13.2H5.05Z',
+  },
+} as const;
+
+const icon = icons[name];
+const w = size ?? icon.w;
+const h = size ? (icon.h / icon.w) * size : icon.h;
+---
+
+<svg
+  class={className}
+  viewBox={`0 0 ${icon.w} ${icon.h}`}
+  width={w}
+  height={h}
+  fill="none"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path d={icon.d} fill="currentColor"></path>
+</svg>

@@ -1,0 +1,38 @@
+/* Design tokens extracted from the Figma SVG exports (ui/*.svg). */
+
+:root {
+  --bg: #f8f8f4;
+  --band: #eeefea;
+  --ink: #191c20;
+  --muted: #646970;
+  --blue: #183fba;
+  --hairline: #d8dbd8;
+  --on-blue: #ffffff;
+
+  /* Layout: 1440 frame with 80px gutters -> 1280px content. */
+  --gutter: 80px;
+  --maxw: 1280px;
+
+  --font-sans: "Inter", "Vazirmatn", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "Vazirmatn", ui-monospace, SFMono-Regular,
+    Menlo, Consolas, monospace;
+
+  /* Tracking is only valid for Latin labels; RTL resets it. */
+  --track-nav: 0.05em;
+  --track-mono: 0.14em;
+
+  --header-h: 104px;
+}
+
+[dir="rtl"] {
+  --track-nav: normal;
+  --track-mono: normal;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --gutter: 24px;
+    --header-h: 86px;
+  }
+}

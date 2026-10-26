@@ -72,10 +72,10 @@ All text in the SVGs is outlined; no font metadata exists.
 ## 3. Milestones
 
 ### M0 — Bootstrap
-- [ ] `.gitignore`, `package.json`, `tsconfig.json`, `astro.config.mjs`, `.env.example`
-- [ ] Install deps (`astro`, `@astrojs/node`, `better-sqlite3`, fontsource fonts, vitest, zod)
-- [ ] `pnpm dev` boots; `pnpm build` produces `dist/`
-- [ ] First commit + push (creates the first refs on the empty remote)
+- [x] `.gitignore`, `package.json`, `tsconfig.json`, `astro.config.mjs`, `.env.example`
+- [x] Install deps (`astro`, `@astrojs/node`, `better-sqlite3`, fontsource fonts, vitest, zod)
+- [x] `pnpm dev` boots; `pnpm build` produces `dist/`
+- [x] First commit + push (creates the first refs on the empty remote)
 
 ### M1 — EN landing, pixel pass
 - [ ] Extract logo lockup (EN/FA) + mark + icons from `ui/*.svg` into `src/assets/`
@@ -222,5 +222,8 @@ _(none yet — record any architectural or visual deviation here before continui
 
 ## 9. Status
 
-**Current milestone: M0 — Bootstrap**
-Last updated: start of build.
+**Current milestone: M1 — EN landing, pixel pass**
+Last updated: M0 complete (commit `450752d`, pushed to `origin/main`).
+Notes: pinned `astro@7.4.1` (7.4.2 requires Node ≥22.23.4, machine has 22.23.1);
+`@astrojs/check` added so `pnpm build` stays non-interactive; Astro telemetry disabled;
+native builds approved via `pnpm approve-builds --all`.

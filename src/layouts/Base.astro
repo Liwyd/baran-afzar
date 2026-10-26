@@ -1,0 +1,52 @@
+---
+import '~/styles/tokens.css';
+import '~/styles/global.css';
+import '@fontsource/inter/400.css';
+import '@fontsource/inter/500.css';
+import '@fontsource/inter/600.css';
+import '@fontsource/jetbrains-mono/400.css';
+import '@fontsource/jetbrains-mono/400-italic.css';
+import '@fontsource/vazirmatn/400.css';
+import '@fontsource/vazirmatn/500.css';
+
+interface Props {
+  lang: string;
+  dir: 'ltr' | 'rtl';
+  title: string;
+  description: string;
+  ogType?: string;
+}
+
+const { lang, dir, title, description, ogType = 'website' } = Astro.props;
+
+const site = Astro.site ?? new URL('http://127.0.0.1:4321');
+const canonical = new URL(Astro.url.pathname, site);
+const ogImage = new URL('/og.png', site);
+---
+
+<!doctype html>
+<html lang={lang} dir={dir}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='80 36 25.6 32'%3E%3Cpath d='M80 38.7429H83.6571V57.0286H101.943V46.0571H105.6V60.6857H80V38.7429ZM90.9714 36H94.6286V50.6286H90.9714V36ZM90.9714 64.3429H94.6286V68H90.9714V64.3429Z' fill='%23183FBA'/%3E%3C/svg%3E"
+    />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Baran Afzar" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+  </body>
+</html>
