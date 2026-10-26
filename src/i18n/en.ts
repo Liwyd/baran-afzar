@@ -55,12 +55,14 @@ export const en = {
     headline: ['Two engineers.', 'One shared practice.'],
     role: 'Co-founder',
     links: { profile: 'Profile', resume: 'Résumé' },
+    disclosure: 'Show details',
     note: 'Individual profile and résumé links will be added soon.',
   },
   contact: {
     num: '03',
     label: 'Contact',
     heading: 'Start a conversation.',
+    pending: 'Direct contact details will be published soon.',
   },
   quote: {
     text: '“We try to create teams that are no larger than can be fed by two pizzas.”',

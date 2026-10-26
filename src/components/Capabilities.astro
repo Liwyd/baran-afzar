@@ -1,0 +1,147 @@
+---
+import { getDict, type Locale } from '~/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dict = getDict(locale);
+---
+
+<section class="capabilities" id="capabilities" aria-labelledby="capabilities-title">
+  <div class="band">
+    <div class="container cap-grid">
+      <div class="cap-intro">
+        <p class="eyebrow">
+          <span class="num">{dict.capabilities.num}</span>
+          <span>{dict.capabilities.label}</span>
+        </p>
+        <h2 class="cap-title" id="capabilities-title">
+          {dict.capabilities.headline[0]}
+          <br />
+          {dict.capabilities.headline[1]}
+        </h2>
+        <p class="cap-body">{dict.capabilities.body}</p>
+      </div>
+
+      <ol class="cap-rows">
+        {
+          dict.capabilities.rows.map((row) => (
+            <li class="cap-row">
+              <span class="num cap-row-num">{row.n}</span>
+              <span class="cap-row-title">{row.title}</span>
+              <span class="cap-row-desc">{row.desc}</span>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>
+
+<style>
+  .capabilities .band {
+    padding-top: 64px;
+    padding-bottom: 65px;
+  }
+
+  .cap-grid {
+    display: grid;
+    grid-template-columns: 336px minmax(0, 1fr);
+    column-gap: 80px;
+  }
+
+  .cap-title {
+    margin-top: 31px;
+    font-size: 40px;
+    line-height: 40px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .cap-body {
+    margin-top: 13px;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--muted);
+  }
+
+  .cap-row {
+    display: grid;
+    grid-template-columns: 64px 292px minmax(0, 1fr);
+    align-items: baseline;
+    padding-top: 30px;
+    padding-bottom: 38px;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .cap-row:last-child {
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .cap-row-num {
+    font-style: italic;
+  }
+
+  .cap-row-title {
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .cap-row-desc {
+    font-size: 15px;
+    line-height: 26px;
+    color: var(--muted);
+    letter-spacing: -0.005em;
+  }
+
+  @media (max-width: 900px) {
+    .capabilities .band {
+      padding-top: 48px;
+      padding-bottom: 49px;
+    }
+
+    .cap-grid {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: 0;
+    }
+
+    .cap-title {
+      margin-top: 24px;
+      font-size: 30px;
+      line-height: 35px;
+    }
+
+    .cap-body {
+      margin-top: 12px;
+      font-size: 15px;
+      line-height: 24px;
+    }
+
+    .cap-rows {
+      margin-top: 32px;
+    }
+
+    .cap-row {
+      grid-template-columns: auto minmax(0, 1fr);
+      padding-top: 28px;
+      padding-bottom: 30px;
+    }
+
+    .cap-row-title {
+      font-size: 17px;
+      line-height: 24px;
+    }
+
+    .cap-row-desc {
+      grid-column: 1 / -1;
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 22px;
+    }
+  }
+</style>

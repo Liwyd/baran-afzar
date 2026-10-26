@@ -1,5 +1,5 @@
 ---
-import { getDict, type Locale } from '~/i18n';
+import { getDict, isCurrentLocale, type Locale } from '~/i18n';
 import logoLarge from '~/assets/logo-en.svg';
 import logoSmall from '~/assets/logo-en-sm.svg';
 
@@ -21,8 +21,8 @@ const navItems = [
   <div class="container header-inner">
     <a class="brand" href="/" aria-label="Baran Afzar">
       <picture>
-        <source media="(max-width: 900px)" srcset={logoSmall} />
-        <img src={logoLarge} alt="" width="174.387" height="32" />
+        <source media="(max-width: 900px)" srcset={logoSmall.src} />
+        <img src={logoLarge.src} alt="" width="174.387" height="32" />
       </picture>
     </a>
 
@@ -37,11 +37,11 @@ const navItems = [
     </nav>
 
     <div class="lang-switch" dir="ltr">
-      <a href="/" lang="en" hreflang="en" aria-current={locale === 'en' ? 'page' : undefined}>
+      <a href="/" lang="en" hreflang="en" aria-current={isCurrentLocale(locale, 'en') ? 'page' : undefined}>
         {dict.footer.lang.en}
       </a>
       <span class="lang-sep" aria-hidden="true">/</span>
-      <a href="/fa" lang="fa" hreflang="fa" aria-current={locale === 'fa' ? 'page' : undefined}>
+      <a href="/fa" lang="fa" hreflang="fa" aria-current={isCurrentLocale(locale, 'fa') ? 'page' : undefined}>
         {dict.footer.lang.fa}
       </a>
     </div>

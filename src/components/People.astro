@@ -1,0 +1,89 @@
+---
+import { getDict, type Locale } from '~/i18n';
+import { seedMembers } from '~/lib/members';
+import MemberCard from './MemberCard.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dict = getDict(locale);
+const members = seedMembers;
+const anyMissingLinks = members.some(
+  (m) => !m.profileUrl || !m.resumeUrl
+);
+---
+
+<section class="people" id="people" aria-labelledby="people-title">
+  <div class="container">
+    <p class="eyebrow">
+      <span class="num">{dict.people.num}</span>
+      <span>{dict.people.label}</span>
+    </p>
+    <h2 class="people-title" id="people-title">
+      {dict.people.headline[0]}
+      {' '}
+      {dict.people.headline[1]}
+    </h2>
+
+    <div class="people-grid">
+      {members.map((member) => <MemberCard member={member} locale={locale} />)}
+    </div>
+
+    {anyMissingLinks ? <p class="people-note">{dict.people.note}</p> : null}
+  </div>
+</section>
+
+<style>
+  .people {
+    padding-top: 64px;
+  }
+
+  .people-title {
+    margin-top: 29px;
+    font-size: 40px;
+    line-height: 44px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .people-grid {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .people-note {
+    padding-top: 30px;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 900px) {
+    .people {
+      padding-top: 48px;
+    }
+
+    .people-title {
+      margin-top: 24px;
+      font-size: 30px;
+      line-height: 36px;
+    }
+
+    .people-grid {
+      margin-top: 28px;
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .people-note {
+      padding-top: 26px;
+      font-size: 13px;
+      line-height: 21px;
+    }
+  }
+</style>

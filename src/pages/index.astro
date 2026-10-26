@@ -1,6 +1,28 @@
 ---
-const title = 'Baran Afzar';
+import Base from '~/layouts/Base.astro';
+import Header from '~/components/Header.astro';
+import Hero from '~/components/Hero.astro';
+import Approach from '~/components/Approach.astro';
+import Capabilities from '~/components/Capabilities.astro';
+import People from '~/components/People.astro';
+import Contact from '~/components/Contact.astro';
+import Quote from '~/components/Quote.astro';
+import Footer from '~/components/Footer.astro';
+import { getDict, defaultLocale } from '~/i18n';
+
+const locale = defaultLocale;
+const dict = getDict(locale);
 ---
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><title>{title}</title></head>
-<body><h1>{title}</h1></body></html>
+
+<Base lang="en" dir="ltr" title={dict.meta.title} description={dict.meta.description}>
+  <Header locale={locale} />
+  <main id="main">
+    <Hero locale={locale} />
+    <Approach locale={locale} />
+    <Capabilities locale={locale} />
+    <People locale={locale} />
+    <Quote locale={locale} />
+    <Contact locale={locale} />
+  </main>
+  <Footer locale={locale} />
+</Base>

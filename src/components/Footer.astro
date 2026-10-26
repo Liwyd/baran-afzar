@@ -1,0 +1,144 @@
+---
+import { getDict, isCurrentLocale, type Locale } from '~/i18n';
+import Icon from './Icon.astro';
+import logoLarge from '~/assets/logo-en.svg';
+import logoSmall from '~/assets/logo-en-sm.svg';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dict = getDict(locale);
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="rule rule--blue"></div>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a class="footer-logo" href="/" aria-label="Baran Afzar">
+          <picture>
+            <source media="(max-width: 900px)" srcset={logoSmall.src} />
+            <img src={logoLarge.src} alt="" width="147.6" height="27.2" />
+          </picture>
+        </a>
+        <p class="footer-tagline">{dict.footer.tagline}</p>
+      </div>
+
+      <div class="footer-meta">
+        <div class="lang-switch" dir="ltr">
+          <a href="/" lang="en" hreflang="en" aria-current={isCurrentLocale(locale, 'en') ? 'page' : undefined}>
+            {dict.footer.lang.en}
+          </a>
+          <span class="lang-sep" aria-hidden="true">/</span>
+          <a href="/fa" lang="fa" hreflang="fa" aria-current={isCurrentLocale(locale, 'fa') ? 'page' : undefined}>
+            {dict.footer.lang.fa}
+          </a>
+        </div>
+
+        <a class="back-to-top" href="#main">
+          <span>{dict.footer.backToTop}</span>
+          <Icon name="arrow-up" size={10.5} />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-inner {
+    padding-top: 32px;
+    padding-bottom: 48px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  .footer-logo {
+    display: block;
+    line-height: 0;
+  }
+
+  .footer-tagline {
+    margin-top: 22px;
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--muted);
+  }
+
+  .footer-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 26px;
+  }
+
+  .lang-switch {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 20px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .lang-switch a {
+    transition: color 0.15s ease;
+  }
+
+  .lang-switch a:hover {
+    color: var(--ink);
+  }
+
+  .lang-switch a[aria-current='page'] {
+    color: var(--blue);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .lang-sep {
+    color: var(--muted);
+  }
+
+  .back-to-top {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+    letter-spacing: var(--track-mono);
+    color: var(--blue);
+    transition: color 0.15s ease;
+  }
+
+  .back-to-top:hover {
+    color: var(--ink);
+  }
+
+  .back-to-top :global(svg) {
+    flex: none;
+  }
+
+  @media (max-width: 900px) {
+    .footer-inner {
+      padding-top: 28px;
+      padding-bottom: 40px;
+    }
+
+    .footer-tagline {
+      margin-top: 18px;
+      font-size: 13px;
+      line-height: 20px;
+    }
+
+    .footer-meta {
+      gap: 22px;
+    }
+  }
+</style>

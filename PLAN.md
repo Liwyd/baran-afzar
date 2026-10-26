@@ -78,17 +78,17 @@ All text in the SVGs is outlined; no font metadata exists.
 - [x] First commit + push (creates the first refs on the empty remote)
 
 ### M1 — EN landing, pixel pass
-- [ ] Extract logo lockup (EN/FA) + mark + icons from `ui/*.svg` into `src/assets/`
-- [ ] Design tokens + global CSS (`tokens.css`, `global.css`), focus-visible, reduced-motion
-- [ ] Base layout: header (logo, nav, lang switch), skip link, semantic landmarks
-- [ ] Hero: eyebrow `00`, 2-line display headline, sub, blue CTA, caret bars + intro
-- [ ] Approach row `01/02/03`
-- [ ] Capabilities band (3 hairline rows)
-- [ ] People section with 2 cards + disclosure + "links added soon" note
-- [ ] Contact band
-- [ ] Quote + footer (logo, tagline, lang switch, back to top)
-- [ ] Responsive: 1440 and 390 layouts match `ui/2.svg` / `ui/4.svg` by overlay diff
-- [ ] Hover/focus states, caret blink animation, `prefers-reduced-motion`
+- [x] Extract logo lockup (EN/FA) + mark + icons from `ui/*.svg` into `src/assets/`
+- [x] Design tokens + global CSS (`tokens.css`, `global.css`), focus-visible, reduced-motion
+- [x] Base layout: header (logo, nav, lang switch), skip link, semantic landmarks
+- [x] Hero: eyebrow `00`, 2-line display headline, sub, blue CTA, caret bars + intro
+- [x] Approach row `01/02/03`
+- [x] Capabilities band (3 hairline rows)
+- [x] People section with 2 cards + disclosure + "links added soon" note
+- [x] Contact band
+- [x] Quote + footer (logo, tagline, lang switch, back to top)
+- [x] Responsive: 1440 and 390 layouts match `ui/2.svg` / `ui/4.svg` by overlay diff
+- [x] Hover/focus states, caret blink animation, `prefers-reduced-motion`
 
 ### M2 — FA locale + SEO
 - [ ] `/fa` RTL page matching `ui/1.svg` / `ui/3.svg`
@@ -222,8 +222,7 @@ _(none yet — record any architectural or visual deviation here before continui
 
 ## 9. Status
 
-**Current milestone: M1 — EN landing, pixel pass**
-Last updated: M0 complete (commit `450752d`, pushed to `origin/main`).
-Notes: pinned `astro@7.4.1` (7.4.2 requires Node ≥22.23.4, machine has 22.23.1);
-`@astrojs/check` added so `pnpm build` stays non-interactive; Astro telemetry disabled;
-native builds approved via `pnpm approve-builds --all`.
+**Current milestone: M2 — FA locale + SEO**
+Last updated: M1 complete. Notes: EN landing built (Header/Hero/Approach/
+Capabilities/People/MemberCard/Contact/Quote/Footer); overlay landmark check
+within ~1px on header/CTA/rules; contact band placed above footer per §1.

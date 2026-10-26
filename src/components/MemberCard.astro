@@ -1,0 +1,258 @@
+---
+import { getDict, type Locale } from '~/i18n';
+import type { Member } from '~/lib/types';
+import Icon from './Icon.astro';
+
+interface Props {
+  member: Member;
+  locale: Locale;
+}
+
+const { member, locale } = Astro.props;
+const dict = getDict(locale);
+
+const hasLinks = Boolean(member.profileUrl || member.resumeUrl);
+const hasDisclosure = Boolean(
+  member.bio?.[locale] || member.linkedinUrl || member.githubUrl
+);
+---
+
+<article class="member" aria-labelledby={`member-${member.slug}`}>
+  <div class="member-top">
+    <p class="member-label">{member.label[locale]}</p>
+    <p class="member-initials mono" aria-hidden="true">{member.initials}</p>
+  </div>
+
+  <h3 class="member-name" id={`member-${member.slug}`}>{member.name[locale]}</h3>
+  {
+    locale === 'en' && member.nameNative ? (
+      <p class="member-native">
+        <span lang="fa" dir="rtl">
+          {member.nameNative}
+        </span>
+      </p>
+    ) : null
+  }
+  <p class="member-title">{member.title[locale]}</p>
+
+  {
+    hasLinks ? (
+      <p class="member-links">
+        {member.profileUrl ? (
+          <a
+            class="member-link"
+            href={member.profileUrl}
+            rel="noopener noreferrer external"
+            target="_blank"
+          >
+            <span>{dict.people.links.profile}</span>
+            <Icon name="arrow-up-right" size={9.792} />
+          </a>
+        ) : null}
+        {member.resumeUrl ? (
+          <a class="member-link" href={member.resumeUrl}>
+            <span>{dict.people.links.resume}</span>
+            <Icon name="arrow-down" size={10.5} />
+          </a>
+        ) : null}
+      </p>
+    ) : null
+  }
+
+  {
+    hasDisclosure ? (
+      <details class="member-disclosure">
+        <summary class="member-disclosure-toggle">
+          <span class="mono" aria-hidden="true">
+            +
+          </span>
+          <span class="visually-hidden">
+            {member.name[locale]} — {dict.people.disclosure}
+          </span>
+        </summary>
+        <div class="member-disclosure-body">
+          {member.bio?.[locale] ? <p class="member-bio">{member.bio[locale]}</p> : null}
+          <p class="member-social">
+            {member.linkedinUrl ? (
+              <a
+                class="member-link"
+                href={member.linkedinUrl}
+                rel="noopener noreferrer external"
+                target="_blank"
+              >
+                <span>LinkedIn</span>
+                <Icon name="arrow-up-right" size={9.792} />
+              </a>
+            ) : null}
+            {member.githubUrl ? (
+              <a
+                class="member-link"
+                href={member.githubUrl}
+                rel="noopener noreferrer external"
+                target="_blank"
+              >
+                <span>GitHub</span>
+                <Icon name="arrow-up-right" size={9.792} />
+              </a>
+            ) : null}
+          </p>
+        </div>
+      </details>
+    ) : null
+  }
+</article>
+
+<style>
+  .member {
+    min-width: 0;
+    padding-top: 32px;
+    padding-bottom: 32px;
+    padding-inline-end: 40px;
+  }
+
+  .member + .member {
+    border-inline-start: 1px solid var(--hairline);
+    padding-inline-end: 0;
+    padding-inline-start: 40px;
+  }
+
+  .member-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 16px;
+    text-transform: uppercase;
+    letter-spacing: var(--track-mono);
+    color: var(--muted);
+  }
+
+  .member-initials {
+    color: var(--blue);
+    font-style: italic;
+  }
+
+  .member-name {
+    margin-top: 28px;
+    font-size: 36px;
+    line-height: 40px;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .member-native {
+    margin-top: 6px;
+    font-size: 15px;
+    line-height: 24px;
+    color: var(--muted);
+  }
+
+  .member-title {
+    margin-top: 4px;
+    font-size: 16px;
+    line-height: 26px;
+    color: var(--ink);
+  }
+
+  .member-links {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+
+  .member-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--blue);
+    font-size: 15px;
+    line-height: 20px;
+    color: var(--blue);
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .member-link:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .member-link :global(svg) {
+    flex: none;
+  }
+
+  .member-disclosure {
+    margin-top: 24px;
+  }
+
+  .member-disclosure-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    color: var(--blue);
+    border: 1px solid var(--hairline);
+    transition: border-color 0.15s ease;
+  }
+
+  .member-disclosure-toggle:hover {
+    border-color: var(--blue);
+  }
+
+  .member-disclosure[open] .member-disclosure-toggle .mono {
+    display: inline-block;
+    transform: rotate(45deg);
+  }
+
+  .member-disclosure-body {
+    margin-top: 16px;
+  }
+
+  .member-bio {
+    font-size: 15px;
+    line-height: 25px;
+    color: var(--muted);
+  }
+
+  .member-social {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  @media (max-width: 900px) {
+    .member {
+      padding: 28px 0 34px;
+    }
+
+    .member + .member {
+      border-inline-start: 0;
+      border-top: 1px solid var(--hairline);
+      padding-inline-start: 0;
+    }
+
+    .member-name {
+      margin-top: 24px;
+      font-size: 28px;
+      line-height: 34px;
+    }
+
+    .member-title {
+      font-size: 15px;
+      line-height: 24px;
+    }
+
+    .member-links {
+      margin-top: 26px;
+    }
+  }
+</style>

@@ -31,3 +31,7 @@ export function otherLocale(_locale: Locale): Locale {
 export function localePath(locale: Locale, path = '/'): string {
   return locale === 'en' ? path : `/${locale}${path === '/' ? '' : path}`;
 }
+
+export function isCurrentLocale(locale: Locale, target: string): boolean {
+  return locale === target;
+}

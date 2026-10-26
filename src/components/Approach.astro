@@ -1,0 +1,87 @@
+---
+import { getDict, type Locale } from '~/i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dict = getDict(locale);
+---
+
+<section class="approach" id="approach" aria-label={dict.approach.label}>
+  <div class="container">
+    <ol class="approach-grid">
+      {
+        dict.approach.items.map((item) => (
+          <li class="approach-item">
+            <p class="approach-head">
+              <span class="num">{item.n}</span>
+              <span class="approach-title">{item.title}</span>
+            </p>
+            <p class="approach-desc">{item.desc}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .approach {
+    padding-top: 29px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .approach-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 40px;
+  }
+
+  .approach-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .approach-head .num {
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .approach-desc {
+    margin-top: 13px;
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--muted);
+  }
+
+  @media (max-width: 900px) {
+    .approach {
+      padding-top: 25px;
+      padding-bottom: 24px;
+    }
+
+    .approach-grid {
+      column-gap: 12px;
+    }
+
+    .approach-head {
+      gap: 8px;
+      font-size: 13px;
+      line-height: 18px;
+    }
+
+    .approach-desc {
+      margin-top: 6px;
+      font-size: 12px;
+      line-height: 17px;
+    }
+  }
+</style>
