@@ -23,9 +23,17 @@ const hasDisclosure = Boolean(
     <p class="member-initials mono" aria-hidden="true">{member.initials}</p>
   </div>
 
-  <h3 class="member-name" id={`member-${member.slug}`}>{member.name[locale]}</h3>
+  <h3 class="member-name" id={`member-${member.slug}`}>
+    {locale === 'fa' ? member.nameNative : member.name[locale]}
+  </h3>
   {
-    locale === 'en' && member.nameNative ? (
+    locale === 'fa' ? (
+      <p class="member-native">
+        <span lang="en" dir="ltr">
+          {member.name.en}
+        </span>
+      </p>
+    ) : member.nameNative ? (
       <p class="member-native">
         <span lang="fa" dir="rtl">
           {member.nameNative}

@@ -8,6 +8,7 @@ import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/400-italic.css';
 import '@fontsource/vazirmatn/400.css';
 import '@fontsource/vazirmatn/500.css';
+import { isLocale, otherLocale, type Locale } from '~/i18n';
 
 interface Props {
   lang: string;
@@ -19,9 +20,15 @@ interface Props {
 
 const { lang, dir, title, description, ogType = 'website' } = Astro.props;
 
+const locale: Locale = isLocale(lang) ? lang : 'en';
+const alt = otherLocale(locale);
+const skipLabel = locale === 'fa' ? 'پرش به محتوا' : 'Skip to content';
+
 const site = Astro.site ?? new URL('http://127.0.0.1:4321');
 const canonical = new URL(Astro.url.pathname, site);
+const altUrl = new URL(alt === 'en' ? '/' : '/fa', site);
 const ogImage = new URL('/og.png', site);
+const ogLocale = locale === 'fa' ? 'fa_IR' : 'en_US';
 ---
 
 <!doctype html>
@@ -32,6 +39,9 @@ const ogImage = new URL('/og.png', site);
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={locale} href={canonical} />
+    <link rel="alternate" hreflang={alt} href={altUrl} />
+    <link rel="alternate" hreflang="x-default" href={new URL('/', site)} />
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='80 36 25.6 32'%3E%3Cpath d='M80 38.7429H83.6571V57.0286H101.943V46.0571H105.6V60.6857H80V38.7429ZM90.9714 36H94.6286V50.6286H90.9714V36ZM90.9714 64.3429H94.6286V68H90.9714V64.3429Z' fill='%23183FBA'/%3E%3C/svg%3E"
@@ -42,11 +52,13 @@ const ogImage = new URL('/og.png', site);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={locale === 'fa' ? 'en_US' : 'fa_IR'} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="generator" content={Astro.generator} />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">{skipLabel}</a>
     <slot />
   </body>
 </html>

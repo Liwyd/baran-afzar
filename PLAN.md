@@ -91,12 +91,12 @@ All text in the SVGs is outlined; no font metadata exists.
 - [x] Hover/focus states, caret blink animation, `prefers-reduced-motion`
 
 ### M2 — FA locale + SEO
-- [ ] `/fa` RTL page matching `ui/1.svg` / `ui/3.svg`
-- [ ] i18n dictionaries `src/i18n/{en,fa}.ts` (static copy only)
-- [ ] Language switch preserves state; `dir="rtl"` + `lang` attributes
-- [ ] Per-locale `<title>`, description, canonical, hreflang, Open Graph, favicon
-- [ ] `robots.txt` + `sitemap.xml`
-- [ ] Heading hierarchy + landmark audit (both locales)
+- [x] `/fa` RTL page matching `ui/1.svg` / `ui/3.svg`
+- [x] i18n dictionaries `src/i18n/{en,fa}.ts` (static copy only)
+- [x] Language switch preserves state; `dir="rtl"` + `lang` attributes
+- [x] Per-locale `<title>`, description, canonical, hreflang, Open Graph, favicon
+- [x] `robots.txt` + `sitemap.xml`
+- [x] Heading hierarchy + landmark audit (both locales)
 
 ### M3 — Content from DB
 - [ ] SQLite schema + migration runner + seed with the design's copy
@@ -216,13 +216,18 @@ ui/*.svg   (reference designs — never modified)
 
 ## 8. Deviations
 
-_(none yet — record any architectural or visual deviation here before continuing)_
+- Contact band (M1) is not present in the `ui/*.svg` designs; placed above the
+  footer per §1 information architecture. Renders a "details soon" line while
+  `contactEmail` is null.
+- User scoped the deliverable to the landing page (EN + FA, SEO). M3–M7
+  (DB, admin, dashboard, perf tests, ops docs) deferred pending user request.
 
 ---
 
 ## 9. Status
 
-**Current milestone: M2 — FA locale + SEO**
-Last updated: M1 complete. Notes: EN landing built (Header/Hero/Approach/
-Capabilities/People/MemberCard/Contact/Quote/Footer); overlay landmark check
-within ~1px on header/CTA/rules; contact band placed above footer per §1.
+**Current milestone: M2 — FA locale + SEO (complete)**
+Last updated: M2 complete. Notes: FA locale live at `/fa` (RTL, Vazirmatn,
+Persian copy transcribed from `ui/1.svg`/`ui/3.svg`); hreflang/canonical/OG
+per locale; robots.txt + sitemap.xml; og.png placeholder. Landing page
+deliverable is complete — awaiting user direction on M3+.

@@ -1,7 +1,9 @@
 ---
-import { getDict, isCurrentLocale, type Locale } from '~/i18n';
-import logoLarge from '~/assets/logo-en.svg';
-import logoSmall from '~/assets/logo-en-sm.svg';
+import { getDict, isCurrentLocale, localePath, type Locale } from '~/i18n';
+import logoEn from '~/assets/logo-en.svg';
+import logoEnSm from '~/assets/logo-en-sm.svg';
+import logoFa from '~/assets/logo-fa.svg';
+import logoFaSm from '~/assets/logo-fa-sm.svg';
 
 interface Props {
   locale: Locale;
@@ -9,6 +11,10 @@ interface Props {
 
 const { locale } = Astro.props;
 const dict = getDict(locale);
+
+const logoLarge = locale === 'fa' ? logoFa : logoEn;
+const logoSmall = locale === 'fa' ? logoFaSm : logoEnSm;
+const brandHref = localePath(locale);
 
 const navItems = [
   { href: '#approach', label: dict.nav.approach },
@@ -19,10 +25,10 @@ const navItems = [
 
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href="/" aria-label="Baran Afzar">
+    <a class="brand" href={brandHref} aria-label="Baran Afzar">
       <picture>
         <source media="(max-width: 900px)" srcset={logoSmall.src} />
-        <img src={logoLarge.src} alt="" width="174.387" height="32" />
+        <img src={logoLarge.src} alt="" height="32" />
       </picture>
     </a>
 

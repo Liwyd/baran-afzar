@@ -9,7 +9,7 @@ import type { Member } from './types';
 export const seedMembers: Member[] = [
   {
     slug: 'ali-karimi',
-    label: { en: 'Co-founder', fa: 'بنیان‌گذار' },
+    label: { en: 'Co-founder', fa: 'هم‌بنیان‌گذار' },
     initials: 'A. K.',
     name: { en: 'Ali Karimi', fa: 'Ali Karimi' },
     nameNative: 'علی کریمی',
@@ -25,7 +25,7 @@ export const seedMembers: Member[] = [
   },
   {
     slug: 'amir-taha-javadi',
-    label: { en: 'Co-founder', fa: 'بنیان‌گذار' },
+    label: { en: 'Co-founder', fa: 'هم‌بنیان‌گذار' },
     initials: 'A. T. J.',
     name: { en: 'Amir Taha Javadi', fa: 'Amir Taha Javadi' },
     nameNative: 'امیر طها جوادی',

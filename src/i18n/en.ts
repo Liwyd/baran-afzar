@@ -73,6 +73,6 @@ export const en = {
     backToTop: 'Back to top',
     lang: { en: 'EN', fa: 'فارسی' },
   },
-} as const;
+};
 
 export type Dict = typeof en;

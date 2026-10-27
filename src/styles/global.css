@@ -170,3 +170,10 @@ hr {
 .skip-link:focus {
   transform: translateY(0);
 }
+
+/* ---- RTL -------------------------------------------------------------- */
+
+[dir='rtl'] .btn-primary :is(svg),
+[dir='rtl'] .member-link :is(svg) {
+  transform: scaleX(-1);
+}
